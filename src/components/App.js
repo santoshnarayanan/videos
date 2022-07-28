@@ -1,21 +1,23 @@
 import SearchBar from "./searchBar";
-import youtube from "./apis/youtube";
 import VideoList from "./VideoList";
 import VideoDetail from "./VideoDetail";
-import React, {useState, useEffect} from "react";
+import useVideos from "../hooks/useVideos";
+import React, {useEffect, useState} from "react";
 
 const App = () =>{
   
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [videos, search] = useVideos('building');
 
+  useEffect(() => {
+    setSelectedVideo(videos[0]);
+  }, [videos]);
   
-  //setSelectedVideo(response.data.items[0]);
-
   
 
   return (
     <div className="ui container">
-      <SearchBar onFormSubmit={onTermSubmit} />
+      <SearchBar onFormSubmit={search} />
       <div className="ui grid">
         <div className="ui row">
           <div className=" eleven wide column">
